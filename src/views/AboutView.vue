@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useUserStore } from '@/stores/User'
 import { computed, ref } from 'vue'
 import Tag from '@/components/baseComponents/Tag.vue'
@@ -7,8 +7,10 @@ import BaseTable from '@/components/baseComponents/BaseTable.vue'
 import BaseButton from '@/components/baseComponents/BaseButton.vue'
 import { useGetUsers } from '@/composables/UseGetUsers'
 import BaseInputSearch from '@/components/baseComponents/BaseInputSearch.vue'
-const user = useUserStore()
+import BaseModal from '@/components/baseComponents/BaseModal.vue'
+import type { Ref } from 'vue'
 
+const user = useUserStore()
 const { employees, isLoading, nextPage, prevPage } = useGetUsers(`https://reqres.in/api/users`)
 
 const localStorageData = localStorage.getItem('userData')
@@ -43,12 +45,7 @@ const onPagePrev = function () {
       <div class="flex justify-between mb-6">
         <BaseInputSearch />
 
-        <BaseButton
-          class="flex items-center justify-center hover:bg-primary-800 font-medium rounded-lg text-sm px-4 py-2 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-primary-500 focus:border-primary-500"
-          variant="primary"
-        >
-          <template #text> add employee </template>
-        </BaseButton>
+        <BaseModal />
       </div>
       <BaseTable
         :headers="['Name', 'Email', 'Gender', 'Location', '']"

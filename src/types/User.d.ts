@@ -1,4 +1,4 @@
-export interface employee {
+export interface user {
   name: string
   nickName: String
 }

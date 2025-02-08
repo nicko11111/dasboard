@@ -1,11 +1,12 @@
 import { GetUsers } from '@/database/models/GetUsers'
 import { computed, ref, watchEffect } from 'vue'
 import type { Ref } from 'vue'
+import type { employees } from '@/types/Employees'
 export function useGetUsers(url: string) {
   console.log(url)
   const isLoading: Ref<boolean> = ref(false)
-  const employees = ref([])
-  const errors: Ref<Array> = ref([])
+  const employees: Ref<employees[]> = ref([])
+  const errors = ref([])
   const page: Ref<number> = ref(1)
   const results: Ref<number> = ref(10)
 
@@ -25,7 +26,8 @@ export function useGetUsers(url: string) {
       const { data } = await GetUsers('https://randomuser.me/api/', { params: { ...params.value } })
       employees.value = data.results
     } catch (error) {
-      errors.value = error
+      console.log(error.message)
+      errors.value = error.message
     } finally {
       isLoading.value = false
     }

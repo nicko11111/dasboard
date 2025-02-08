@@ -9,12 +9,12 @@ import { useRouter } from 'vue-router'
 import { computed } from 'vue'
 
 import { useUserStore } from '@/stores/User'
-import type { employee } from '@/types/User'
+import type { user } from '@/types/User'
 
 const user = useUserStore()
 const router = useRouter()
 
-const form: Ref<employee> = ref({
+const form: Ref<user> = ref({
   name: '',
   nickName: '',
 })
